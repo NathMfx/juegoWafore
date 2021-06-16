@@ -29,7 +29,6 @@ let juego = new Juego({ personaje });
 let button;
 
 function preload() {
-  // images.muro = loadImage('./assets/wall.png');
   images.goal = loadImage('./assets/goal.jpeg');
   images.palancaOff = loadImage('./assets/palanca1.png');
   images.palancaOn = loadImage('./assets/palanca2.png');
@@ -45,8 +44,6 @@ function preload() {
   }
   images.enemy_one = {
     default: loadImage('./assets/enemigo_derecha.png'),
-    // up: loadImage('./assets/enemigo_arriba.png'),
-    // down: loadImage('./assets/enemigo_abajo.png'),
     left: loadImage('./assets/enemigo_izquierda.png'),
     right: loadImage('./assets/enemigo_derecha.png'),
   }
@@ -103,18 +100,9 @@ function setup() {
   juego.addEscenario(generarEscenario(3));
   juego.addEscenario(generarEscenario(4));
   juego.addEscenario(generarEscenario(5));
-  // juego.escenario = 4; // TODO borrar
   
-  button = createButton('submit');
-  button.mousePressed(printGameInfo);
   createCanvas(MAX_WIDTH, MAX_HEIGHT);
   frameRate(25);
-}
-
-function printGameInfo() {
-  console.log('personaje', juego.personaje);
-  console.log('escenario activo', juego.escenarioActivo);
-  console.log('pantalla activa', juego.pantallaActiva);
 }
 
 function showLife(){
@@ -149,7 +137,6 @@ if (juego.escenario == 2){
   for(let i = 1; i <= juego.collection; i++){
     image(images.key,0+(20 * i), 80, 20, 20);
   }
-  //image(images.key,MAX_WIDTH-50, 30, 40, 40);
   
 }
 if (juego.escenario == 3 || juego.escenario == 4 ||  juego.escenario == 1 ){
@@ -157,8 +144,6 @@ if (juego.escenario == 3 || juego.escenario == 4 ||  juego.escenario == 1 ){
   for(let i = 1; i <= juego.collection; i++){
     image(images.key,0+(20 * i), 80, 20, 20);
   }
-  //image(images.key,MAX_WIDTH-50, 30, 40, 40);
-  
 }
 
 }
@@ -168,17 +153,12 @@ function gemsInInventory(){
     for(let i = 1; i <= juego.gemas; i++){      
       image(images.gem,0+(20 * i), 110, 20, 20);
     }
-    ///image(images.gem,MAX_WIDTH-50, 60, 40, 40);
-    //text("X "+juego.gemas, MAX_WIDTH-20, 60, 30, 30); 
-
   }
   if (juego.escenario == 3 || juego.escenario == 4  || juego.escenario == 1){
    
     for(let i = 1; i <= juego.gemas; i++){
       image(images.gem,0+(20 * i), 110, 20, 20);
     }
-    ///image(images.gem,MAX_WIDTH-50, 60, 40, 40);
-    //text("X "+juego.gemas, MAX_WIDTH-20, 60, 30, 30); 
 
   }
 }
@@ -437,7 +417,6 @@ function keyTyped() {
 }
 
 function mousePressed() {
-  console.log(mouseX, mouseY);
   if (MOVE_CHARACTER) {
     juego.personaje.posX = mouseX;
     juego.personaje.posY = mouseY;
@@ -716,13 +695,6 @@ function generarEscenario(level) {
     escenario.addMuro(new Elemento({ posX: 710, posY: 250, sizeX: 285, sizeY: 78, image: images.empty }));
     escenario.addMuro(new Elemento({ posX: 695, posY: 620, sizeX: 285, sizeY: 78, image: images.empty }));
     escenario.addMuro(new Elemento({ posX: 1120, posY: 220, sizeX: 78, sizeY: 280, image: images.empty }));
-    /*escenario.addMuro(new Elemento({ posX: 450, posY: 110, sizeX: 300, sizeY: 40, image: images.muro }));
-    escenario.addMuro(new Elemento({ posX: 850, posY: 110, sizeX: 350, sizeY: 40, image: images.muro }));*/
-    
-    /*const murofake1 = new Elemento({ posX: 450, posY: 50, sizeX: 250, sizeY: 60, image: images.muro });
-    const murofake2 = new Elemento({ posX: 900, posY: 50, sizeX: 300, sizeY: 60, image: images.muro });
-    escenario.addMuro(murofake1);
-    escenario.addMuro(murofake2);*/
     
     escenario.addActivable(new Activable({ posX: 1140, posY: 630, sizeX: 50, sizeY: 50, image: images.palancaOff,
       onInteraction: function() {
@@ -745,38 +717,9 @@ function generarEscenario(level) {
         }                      
       }
     }));
-    /*escenario.addActivable(new Activable({ posX: 750, posY: 70, sizeX: 100, sizeY: 30, image: images.empty, onCollide: () => {
-      escenario.removeMuro(murofake1)
-      escenario.removeMuro(murofake2)
-    }}))*/
-   /* escenario.addActivable(new Activable({ posX: 110, posY: 145, sizeX: 50, sizeY: 50, image: images.key, onCollide:function () {
-      juego.collection += 1;
-      escenario.removeActivable(this);
-    }}));
-    escenario.addActivable(new Activable({ posX: 1020, posY: 470, sizeX: 50, sizeY: 50, image: images.gem, onCollide:function () {
-      juego.gemas += 1;
-      escenario.removeActivable(this);
-    }}));
-    escenario.addActivable(new Activable({ posX: 500, posY: 45, sizeX: 50, sizeY: 50, image: images.gem, onCollide:function () {
-      juego.gemas += 1;
-      escenario.removeActivable(this);
-    }}));
-    escenario.addActivable(new Activable({ posX: 600, posY: 45, sizeX: 50, sizeY: 50, image: images.gem, onCollide:function () {
-      juego.gemas += 1;
-      escenario.removeActivable(this);
-    }}));
-    escenario.addActivable(new Activable({ posX: 950, posY: 45, sizeX: 50, sizeY: 50, image: images.gem, onCollide:function () {
-      juego.gemas += 1;
-      escenario.removeActivable(this);
-    }}));
-    escenario.addActivable(new Activable({ posX: 1020, posY: 45, sizeX: 50, sizeY: 50, image: images.gem, onCollide:function () {
-      juego.gemas += 1;
-      escenario.removeActivable(this);
-    }}));*/
 
 
     escenario.addEnemigo(new Enemigo({ posX: 80, posY: 520, sizeX: 50, sizeY: 50, image: images.skullright }));
-    /*escenario.addEnemigo(new Enemigo({ posX: 230, posY: 620, sizeX: 50, sizeY: 50, image: images.enemy_two }));*/
     escenario.addEnemigo(new Enemigo({ posX: 180, posY: 390, sizeX: 50, sizeY: 50, image: images.skullleft }));
     escenario.addEnemigo(new Enemigo({ posX: 210, posY: 570, sizeX: 50, sizeY: 50, image: images.skullleft }));
     escenario.addEnemigo(new Enemigo({ posX: 210, posY: 520, sizeX: 50, sizeY: 50, image: images.skullleft }));
@@ -795,28 +738,6 @@ function generarEscenario(level) {
     escenario.addEnemigo(new Enemigo({ posX: 250, posY: 70, sizeX: 50, sizeY: 50, image: images.skullright }));
     escenario.addEnemigo(door);
     
-    /*escenario.addEnemigo(new Enemigo({ posX: 400, posY: 0, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 50, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 100, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 150, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 200, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 250, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 300, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 350, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 400, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 450, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 400, posY: 500, sizeX: 50, sizeY: 50, image: images.enemy_two }));*/
-    
-    /*escenario.addEnemigo(new Enemigo({ posX: 450, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 500, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 550, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 600, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 650, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two }));
-    escenario.addEnemigo(new Enemigo({ posX: 700, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 750, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 800, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 850, posY: 540, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));*/
-    
     escenario.addEnemigo(new Enemigo({ posX: 620, posY: 450, sizeX: 50, sizeY: 50, image: images.skullleft, invulnerable: true }));
     escenario.addEnemigo(new Enemigo({ posX: 670, posY: 450, sizeX: 50, sizeY: 50, image: images.skullleft, invulnerable: true }));
     escenario.addEnemigo(new Enemigo({ posX: 720, posY: 450, sizeX: 50, sizeY: 50, image: images.skullleft, invulnerable: true }));
@@ -826,14 +747,6 @@ function generarEscenario(level) {
     escenario.addEnemigo(new Enemigo({ posX: 920, posY: 450, sizeX: 50, sizeY: 50, image: images.skullleft, invulnerable: true }));
     escenario.addEnemigo(new Enemigo({ posX: 970, posY: 450, sizeX: 50, sizeY: 50, image: images.skullleft, invulnerable: true }));
 
-    /*escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 250, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 300, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 350, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 400, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 450, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 500, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 550, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));
-    escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 600, sizeX: 50, sizeY: 50, image: images.enemy_two, invulnerable: true }));*/
     escenario.addEnemigo(new Enemigo({ posX: 1070, posY: 625, sizeX: 50, sizeY: 50, image: images.skullleft, invulnerable: true }));
 
     escenario.addEnemigo(new Enemigo({ posX: 270, posY: 630, sizeX: 60, sizeY: 60, image: images.enemy_one.default, views: images.enemy_one, vida: 40, estaArmado: true, direccion: 'up', intervaloDisparo: 1.4 }));
