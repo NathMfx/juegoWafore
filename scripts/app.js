@@ -29,7 +29,6 @@ let juego = new Juego({ personaje });
 let button;
 
 function preload() {
-  images.goal = loadImage('./assets/goal.jpeg');
   images.palancaOff = loadImage('./assets/palanca1.png');
   images.palancaOn = loadImage('./assets/palanca2.png');
   images.heart = loadImage('./assets/heart.png');
@@ -47,7 +46,6 @@ function preload() {
     left: loadImage('./assets/enemigo_izquierda.png'),
     right: loadImage('./assets/enemigo_derecha.png'),
   }
-  images.enemy_two = loadImage('./assets/enemy_two.png');
   images.enemy_bullet = {
     default: loadImage('./assets/ataque_enemigo_derecha.png'),
     up: loadImage('./assets/ataque_enemigo_arriba.png'),
@@ -60,8 +58,6 @@ function preload() {
   images.hint2View = loadImage('./assets/pista2.png');
   images.hint3View = loadImage('./assets/pista3.png');
   images.hint4View = loadImage('./assets/pista4.png');
-  images.start = loadImage('./assets/start.png')
-  images.end = loadImage('./assets/end.png');
   images.swordRight = loadImage('./assets/swordRight.png');
   images.swordUp = loadImage('./assets/swordUp.png');
   images.swordDown = loadImage('./assets/swordDown.png');
